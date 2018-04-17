@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Belgrano|Courgette&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script src="Scripts/jquery-2.2.3.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Style/Activate.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <h3 id="title">uPay</h3>
+        <div style="margin-top: 60px; margin-left: 13%">
+            <ul id="data"></ul>
+        </div>
+        <div id="warnings"></div>
+    </div>
+    <img id="menu" src="Images/home-iphone-icon.png" />
+</body>
+</html>
+<script type="text/javascript">
+    var userToken = localStorage.getItem('userToken');
+    $(document).ready(function () {
+        var activeList = JSON.parse(localStorage.getItem('activateList'));
+        $.each(activeList, function (key, item) {
+            $('#data').append('<li>' + item.CardNumber + (item.IsActive == 1 ? " <img class='run' onclick='change(" + item.ID + ")' src='Images/trash-bin-icon.png' />" : " <img onclick='change(" + item.ID + ")' class='run' src='Images/check-icon.png' />") + '</li>');
+        });
+        $('#menu').on('click', function () {
+            window.location = 'http://localhost:51334/Menu.html';
+        });
+    })
+
+    function change(id) {
+        localStorage.setItem('removedId', id);
+        $.ajax({
+            url: 'http://localhost:51339/api/Process/PutActivation/' + id,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + userToken);
+            },
+            type: 'PUT',
+            success: function () {
+                alert('Change successful');
+                window.location = 'http://localhost:51334/Menu.html';
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    }
+</script>

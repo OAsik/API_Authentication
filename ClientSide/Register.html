@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Belgrano|Courgette&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script src="Scripts/jquery-2.2.3.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Style/Register.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <h3 id="title">uPay</h3>
+        <div style="margin-top: 40px; margin-left: 10%">
+            <span>Your full name: </span>
+            <input id="nameInput" type="text" /><br /><br />
+            <span>E-Mail: </span>
+            <input id="emailInput" type="text" /><br /><br />
+            <span>Username: </span>
+            <input id="usernameInput" type="text" /><br /><br />
+            <span>Password: </span>
+            <input id="passwordInput" type="password" /><br /><br />
+            <button id="create" class="btn btn-success">Create My Account</button>
+        </div>
+        <div id="warnings"></div>
+    </div>
+    <img id="menu" src="Images/home-iphone-icon.png" />
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#create').on('click', function () {
+            var dataObject = JSON.stringify({
+                'FullName': $('#nameInput').val(),
+                'Email': $('#emailInput').val(),
+                'UserName': $('#usernameInput').val(),
+                'Password': $('#passwordInput').val()
+            });
+            $.ajax({
+                url: 'http://localhost:51339/api/Process/PostUser',
+                type: 'POST',
+                contentType: 'application/json',
+                data: dataObject,
+                success: function () {
+                    $('#warnings').html('Account has been successfully created. Go back and sign in.');
+                },
+                error: function (response) {
+                    $('#warnings').html(response.responseJSON.Message);
+                }
+            });
+        });
+        $('#menu').on('click', function () {
+            window.location = 'http://localhost:51334/Home.html';
+        });
+    })
+</script>

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Belgrano|Courgette&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script src="Scripts/jquery-2.2.3.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Style/Pay.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <h3 id="title">uPay</h3>
+        <div id="selectionArea" style="margin-top: 60px; margin-left: 13%">
+            <ul id="data"></ul>
+            <button id="confirm" class="btn btn-success">Proceed</button>
+        </div>
+        <img id="process" style="display: none" src="Images/scan-qr-codes.gif" />
+        <div id="warnings"></div>
+    </div>
+    <img id="menu" src="Images/home-iphone-icon.png" />
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var cardList = JSON.parse(localStorage.getItem('payList'));
+        $.each(cardList, function (key, item) {
+            $('#data').append((item.IsActive == 1 ? '<li>' + item.CardNumber + " <input type='radio' name='selection' />" + '</li>' : ""));
+        });
+        $('#confirm').click(function () {
+            if ($("input:radio[name='selection']").is(':checked')) {
+                $('#selectionArea').css('display', 'none');
+                $('#warnings').html('');
+                $('#process').css('display', 'block');
+                setTimeout(function () {
+                    alert('Your payment has been successful');
+                }, 3000);
+            }
+            else {
+                $('#warnings').html('Select a payment method first.');
+            }
+        });
+        $('#menu').on('click', function () {
+            window.location = 'http://localhost:51334/Menu.html';
+        });
+    })
+</script>

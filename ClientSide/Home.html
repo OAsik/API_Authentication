@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Belgrano|Courgette&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script src="Scripts/jquery-2.2.3.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Style/Home.css" rel="stylesheet" />    
+</head>
+<body>
+    <div id="wrapper">
+        <h3 id="title">uPay</h3>
+        <div id="desc">
+            <span>The scope of this project is Web API token based authentication login and implementing HTTP methods to map CRUD operations. Now lets assume this is a mobile phone interface..</span>
+        </div><br /><br /><br />
+        <div>
+            <button id="register" class="btn btn-success">Register Account</button><br /><br />
+            <button id="login" class="btn btn-success">Existing User</button>
+        </div>
+        <img id="menu" src="Images/home-iphone-icon.png" />
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#register').on('click', function () {
+            window.location = 'http://localhost:51334/Register.html';
+        });
+        $('#login').on('click', function () {
+            window.location = 'http://localhost:51334/Login.html';
+        });
+    })
+</script>

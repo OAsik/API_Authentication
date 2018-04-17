@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Belgrano|Courgette&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script src="Scripts/jquery-2.2.3.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Style/Detail.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <h3 id="title">uPay</h3>
+        <div style="margin-top: 40px; margin-left: 6%">
+            <span>Credit Card Number: </span>
+            <input id="cardNumber" type="text" /><br /><br />
+            <span>Card Owner Full Name: </span>
+            <input id="ownerName" type="text" /><br /><br />
+            <span>Card CVC: </span>
+            <input id="cvc" type="text" /><br /><br />
+            <span>Expiry Date: </span>
+            <input id="expiry" type="text" /><br /><br />
+            <button id="updateCard" class="btn btn-success">Update Changes</button>
+        </div>
+        <div id="warnings"></div>
+    </div>
+    <img id="menu" src="Images/home-iphone-icon.png" />
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var userToken = localStorage.getItem('userToken');
+        var cardDetails = JSON.parse(localStorage.getItem('toUpdate'));
+        var cardId = localStorage.getItem('updatedId');
+        $('#cardNumber').val(cardDetails.CardNumber);
+        $('#ownerName').val(cardDetails.OwnerName);
+        $('#cvc').val(cardDetails.CVC);
+        $('#expiry').val(cardDetails.Expiry);
+        $('#updateCard').click(function () {
+            var cardObject = JSON.stringify({
+                'UserID': 1,
+                'CardNumber': $('#cardNumber').val(),
+                'OwnerName': $('#ownerName').val(),
+                'CVC': $('#cvc').val(),
+                'Expiry': $('#expiry').val(),
+                'IsActive': 1
+            });
+            $.ajax({
+                url: 'http://localhost:51339/api/Process/PutCard/' + cardId,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + userToken);
+                },
+                type: 'PUT',
+                contentType: 'application/json',
+                data: cardObject,
+                success: function () {
+                    $('#warnings').html('Changes have been successfully saved.');
+                },
+                error: function (response) {
+                    $('#warnings').html(response.responseJSON.Message);
+                }
+            });
+        })
+        $('#menu').on('click', function () {
+            window.location = 'http://localhost:51334/Update.html';
+        });
+    })
+</script>

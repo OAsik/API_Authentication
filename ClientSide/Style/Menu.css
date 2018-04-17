@@ -1,0 +1,37 @@
+﻿#wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 360px;
+    height: 480px;
+    border: 2px solid tomato;
+    background: #424242;
+}
+
+#title {
+    font-family: 'Belgrano', cursive;
+    color: #69e65f;
+    font-weight: bold;
+    font-size: 34px;
+    margin-left: 37%;
+}
+
+button {
+    width: 300px;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+#opts {
+    position: relative;
+    cursor: pointer;
+    bottom: -75px;
+    right: 28px;
+}
+
+#menu {
+    position: fixed;
+    bottom: 180px;
+    left: 135px;
+    cursor: pointer;
+}

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Belgrano|Courgette&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script src="Scripts/jquery-2.2.3.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Style/Login.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <h3 id="title">uPay</h3>
+        <div style="margin-top: 60px; margin-left: 10%">
+            <input id="username" type="text" placeholder="Username.." /><br /><br />
+            <input id="password" type="password" placeholder="Password.." /><br /><br />
+            <button id="getToken" class="btn btn-success">Login</button>
+            <!--<button id="log" class="btn btn-success">Login</button>-->
+        </div>
+        <div id="warnings"></div>
+    </div>
+    <img id="menu" src="Images/home-iphone-icon.png" />
+</body>
+</html>
+<script type="text/javascript">
+    var token = "";
+    $('#getToken').click(function () {
+        var User = new Object();
+        User.grant_type = 'password';
+        User.UserName = $('#username').val().toString().trim();
+        User.Password = $('#password').val().toString().trim();
+        $.ajax({
+            url: 'http://localhost:51339/token',
+            type: 'POST',
+            dataType: 'json',
+            data: User,
+            success: function (result) {
+                token = result.access_token;
+                localStorage.setItem('userToken', token);
+                localStorage.setItem('object', JSON.stringify(User))
+                window.location = 'http://localhost:51334/Menu.html';
+            },
+            error: function () {
+                $('#warnings').html('Invalid username or password.');
+            }
+        })
+    });
+    $('#menu').on('click', function () {
+        window.location = 'http://localhost:51334/Home.html';
+    });
+</script>

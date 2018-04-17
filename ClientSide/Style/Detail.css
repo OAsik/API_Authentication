@@ -1,0 +1,53 @@
+﻿#wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 360px;
+    height: 480px;
+    border: 2px solid tomato;
+    background: #424242;
+}
+
+#title {
+    font-family: 'Belgrano', cursive;
+    color: #69e65f;
+    font-weight: bold;
+    font-size: 34px;
+    margin-left: 37%;
+}
+
+span {
+    color: white;
+}
+
+#ownerName {
+    width: 156px;
+}
+
+#cvc {
+    width: 235px;
+}
+
+#expiry {
+    width: 227px;
+}
+
+#updateCard {
+    margin-top: 14px;
+    width: 306px;
+}
+
+#warnings {
+    color: white;
+    width: 70%;
+    text-align: center;
+    margin-top: 16px;
+    margin-left: 46px;
+}
+
+#menu {
+    position: fixed;
+    bottom: 180px;
+    left: 135px;
+    cursor: pointer;
+}

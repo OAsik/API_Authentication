@@ -1,0 +1,54 @@
+﻿#wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 360px;
+    height: 480px;
+    border: 2px solid tomato;
+    background: #424242;
+}
+
+#title {
+    font-family: 'Belgrano', cursive;
+    color: #69e65f;
+    font-weight: bold;
+    font-size: 34px;
+    margin-left: 37%;
+}
+
+span {
+    color: white;
+}
+
+#emailInput {
+    width: 223px;
+}
+
+#usernameInput {
+    width: 197px;
+}
+
+#passwordInput {
+    width: 200px;
+}
+
+#create {
+    font-weight: bold;
+    width: 274px;
+    margin-left: -1%;
+}
+
+#warnings {
+    color: white;
+    width: 70%;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 46px;
+}
+
+#menu {
+    position: fixed;
+    bottom: 180px;
+    left: 135px;
+    cursor: pointer;
+}
