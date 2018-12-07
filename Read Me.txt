@@ -1,0 +1,6 @@
+This is an old repo of mine. I created this project before I started to work as a developer. Thus, I 'might' have skipped OOP
+principles while I was writing. Please look at my other repo named DesignPattern_Service to check out how to construct a clean
+web service project.
+
+Ozgur ASIK
+07.12.2018
